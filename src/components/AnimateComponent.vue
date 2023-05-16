@@ -3,10 +3,7 @@
 	import { gsap } from "gsap";
 	import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 	import { onMounted } from "vue";
-
-	//const animation = ref(null);
 	//register the plugin (just once)
-
 	gsap.registerPlugin(MotionPathPlugin);
 
 	onMounted(() => {
