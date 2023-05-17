@@ -3,28 +3,30 @@
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { onMounted } from "vue";
 
-	gsap.set("img", {
-		yPercent: -50,
-		xPercent: -50,
-		top: "50%",
-		left: "50%",
-		minWidth: "100%",
-		position: "absolute",
+	onMounted(() => {
+		gsap.set("img", {
+			yPercent: -50,
+			xPercent: -50,
+			top: "50%",
+			left: "50%",
+			minWidth: "100%",
+			position: "absolute",
+		});
+
+		//linear easing doesn't APPEAR linear (visually).
+		gsap.fromTo(
+			"#linear img",
+			{ scale: 0.1 },
+			{ scale: 8, duration: 10, ease: "none", repeat: -1 }
+		);
+
+		//notice how we feed in the starting and ending [scale] values to "expoScale()" so that it can adjust its curve accordingly so that scaling appears linear visually even though technically the scale values aren't animating linearly at all.
+		gsap.fromTo(
+			"#expo img",
+			{ scale: 0.1 },
+			{ scale: 8, duration: 10, ease: "expoScale(0.1, 8)", repeat: -1 }
+		);
 	});
-
-	//linear easing doesn't APPEAR linear (visually).
-	gsap.fromTo(
-		"#linear img",
-		{ scale: 0.1 },
-		{ scale: 8, duration: 10, ease: "none", repeat: -1 }
-	);
-
-	//notice how we feed in the starting and ending [scale] values to "expoScale()" so that it can adjust its curve accordingly so that scaling appears linear visually even though technically the scale values aren't animating linearly at all.
-	gsap.fromTo(
-		"#expo img",
-		{ scale: 0.1 },
-		{ scale: 8, duration: 10, ease: "expoScale(0.1, 8)", repeat: -1 }
-	);
 
 	//for a more complicated example that shows multi-step zooming
 	//(swapping new images for better resolution as it progresses),

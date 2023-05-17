@@ -1,60 +1,195 @@
-<script setup lang="ts">
+<script setup>
 	import gsap from "gsap";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { onMounted } from "vue";
 
 	onMounted(() => {
-		gsap.registerPlugin(ScrollTrigger);
-		gsap.to(".testimg", {
-			scrollTrigger: {
-				trigger: ".testimg",
-				start: "top top",
-				end: "bottom center left",
-				scrub: true,
-				markers: false,
-			},
-			y: 50,
-			perspective: 500,
-			rotationY: 45,
-			skewX: 2,
-			scaleZ: 1.5,
-			ease: "none",
-			scale: 2,
-			//crop the bottom of the image
-			//cropBottom: 1000,
-			rotationX: -1,
+		gsap.set("img", {
+			yPercent: -50,
+			xPercent: -50,
+			// top: "50%",
+			// left: "50%",
+			minWidth: "100%",
+			position: "absolute",
 		});
-		gsap.registerPlugin(ScrollTrigger);
-		gsap.to(".testimg", {
-			scrollTrigger: {
-				trigger: ".testimg",
-				start: "bottom center left",
-				end: " center center",
-				scrub: true,
-				markers: false,
-			},
 
-			ease: "power2",
-		});
+		//linear easing doesn't APPEAR linear (visually).
+		// gsap.fromTo(
+		// 	"#linear img",
+		// 	{ scale: 0.1 },
+		// 	{ scale: 8, duration: 10, ease: "none", repeat: -1 }
+		// );
+
+		//notice how we feed in the starting and ending [scale] values to "expoScale()" so that it can adjust its curve accordingly so that scaling appears linear visually even though technically the scale values aren't animating linearly at all.
+		gsap.fromTo(
+			"#expo img",
+			{ scale: 0.1 },
+			{
+				scale: 0.5,
+				duration: 7,
+				ease: "none",
+				/*"expoScale(0.1, 5)",*/ repeat: 0,
+			}
+		);
 	});
+
+	//for a more complicated example that shows multi-step zooming
+	//(swapping new images for better resolution as it progresses),
+	//see https://codepen.io/GreenSock/pen/0cfddbdd3f1954a5cc813994d7b502ac
 </script>
 
 <template>
-	<div class="contain">
-		<!-- <div class="header">
-			<h1>Scroll Animation Test</h1>
-		</div> -->
-		<img
-			src="../assets/images/clearturnroad.jpg"
-			class="testimg"
-			alt="test image"
-		/>
+	<div id="container">
+		<div id="expo">
+			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" />
+			<!-- <img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-2.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-3.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-4.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-5.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-6.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-7.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-8.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-9.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-10.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-11.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-12.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-13.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-14.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-15.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-16.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-17.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-18.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-19.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-20.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-21.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-22.jpg"
+			/> -->
+			<div class="label">Lorem, ipsum dsgrh</div>
+		</div>
 
-		<!-- <img
-			src="../assets/images/clearturnroad.jpg"
-			class="testimg"
-			alt="test image"
-		/> -->
+		<!-- <div id="linear">
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-1.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-2.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-3.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-4.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-5.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-6.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-7.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-8.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-9.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-10.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-11.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-12.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-13.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-14.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-15.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-16.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-17.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-18.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-19.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-20.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-21.jpg"
+			/>
+			<img
+				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-22.jpg"
+			/>
+			<div class="label">Linear easing</div> 
+
+		<link
+			href="//fonts.googleapis.com/css?family=Signika+Negative:300,400"
+			rel="stylesheet"
+			type="text/css"
+		/>-->
 	</div>
 </template>
 
@@ -65,28 +200,42 @@
 		margin: none;
 		max-width: max-content;
 	}
-	.contain {
-		width: 100vw;
-		height: 100vh;
-		overflow: hidden;
+	body {
 		margin: 0;
 		padding: 0;
+		background-color: black;
 	}
-	.testimg {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: center;
-		position: relative;
+	#expo {
+		/*display: none;*/
+	}
+	#container {
+		display: flex;
+		min-height: 100vh;
+		min-width: 100vw;
+	}
+	#expo,
+	#linear {
+		flex-grow: 1;
 		overflow: hidden;
+		position: relative;
+		color: white;
+		font-size: 3em;
 	}
-
-	/* @keyframes move {
-    0% {
-        transform: scale(1);
-    }
-    25% {
-        transform: scale(1.1);
-    }
-} */
+	#linear {
+		border-left: 2px solid white;
+	}
+	img {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		/* min-width: 100%; */
+	}
+	.label {
+		position: relative;
+		top: 0px;
+		padding: 10px;
+		text-align: center;
+		font-family: "Signika Negative", sans-serif;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
 </style>
