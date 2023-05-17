@@ -40,9 +40,9 @@
 			{ opacity: 0.5, scale: 0.1 },
 			{
 				opacity: 1,
-				duration: 7,
+				duration: 2,
 				scale: 0.3,
-				ease: "slow(0.7, 0.7, false)",
+				//ease: "slow(0.7, 0.7, false)",
 				//put to the left
 				x: -200,
 				// ease: "none",
