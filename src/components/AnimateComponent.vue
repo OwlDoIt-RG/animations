@@ -1,93 +1,92 @@
-<script setup>
+<script setup lang="ts">
+	import gsap from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { onMounted } from "vue";
-	import { gsap } from "gsap";
 
-	// gsap.from('.header', { duration: 1, y: '-100%', ease: 'bounce' })
-	// gsap.from('.link', { duration: 1, opacity: 0, delay: 1, stagger: .5 })
-	// gsap.from('.right', { duration: 1, x: '-100vw', delay: 1, ease: 'power2.in' })
-	// gsap.from('.left', { duration: 1, delay: 1.5, x: '-100%' })
-	// gsap.to('.footer', { duration: 1, y: 0, ease: 'elastic', delay: 2.5 })
-	// gsap.fromTo('.button', { opacity: 0, scale: 0, rotation: 720 }, { duration: 1, delay: 3.5, opacity: 1, scale: 1, rotation: 0 })
+	onMounted(() => {
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.to(".testimg", {
+			scrollTrigger: {
+				trigger: ".testimg",
+				start: "top top",
+				end: "bottom center left",
+				scrub: true,
+				markers: false,
+			},
+			y: 50,
+			perspective: 500,
+			rotationY: 45,
+			skewX: 2,
+			scaleZ: 1.5,
+			ease: "none",
+			scale: 2,
+			//crop the bottom of the image
+			//cropBottom: 1000,
+			rotationX: -1,
+		});
+		gsap.registerPlugin(ScrollTrigger);
+		gsap.to(".testimg", {
+			scrollTrigger: {
+				trigger: ".testimg",
+				start: "bottom center left",
+				end: " center center",
+				scrub: true,
+				markers: false,
+			},
 
-	const timeline = gsap.timeline({ defaults: { duration: 1 } });
-	timeline
-		.from(".header", { y: "-100%", ease: "bounce" })
-		.from(".link", { opacity: 0, stagger: 0.5 })
-		.from(".right", { x: "-100vw", ease: "power2.in" }, 1)
-		.from(".left", { x: "-100%" }, "<.5")
-		.to(".footer", { y: 0, ease: "elastic" })
-		.fromTo(
-			".button",
-			{ opacity: 0, scale: 0, rotation: 720 },
-			{ opacity: 1, scale: 1, rotation: 0 }
-		);
-
-	const button = document.querySelector(".button");
-
-	button.addEventListener("click", () => {
-		timeline.timeScale(3);
-		timeline.reverse();
+			ease: "power2",
+		});
 	});
 </script>
 
 <template>
-	<body>
-		<div class="header">
-			<div class="links">
-				<div class="link">Link 1</div>
-				<div class="link">Link 2</div>
-				<div class="link">Link 3</div>
-			</div>
-		</div>
-		<div class="content">
-			<div class="sidebar left"></div>
-			<button class="button">Reverse!</button>
-			<div class="sidebar right"></div>
-		</div>
-		<div class="footer"></div>
-	</body>
+	<div class="contain">
+		<!-- <div class="header">
+			<h1>Scroll Animation Test</h1>
+		</div> -->
+		<img
+			src="../assets/images/clearturnroad.jpg"
+			class="testimg"
+			alt="test image"
+		/>
+
+		<!-- <img
+			src="../assets/images/clearturnroad.jpg"
+			class="testimg"
+			alt="test image"
+		/> -->
+	</div>
 </template>
 
 <style scoped>
-	body {
-		margin: 0;
+	div#app {
+		overflow: hidden;
+		padding: none;
+		margin: none;
+		max-width: max-content;
+	}
+	.contain {
+		width: 100vw;
 		height: 100vh;
-		display: flex;
-		flex-direction: column;
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+	}
+	.testimg {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		position: relative;
 		overflow: hidden;
 	}
 
-	.header {
-		height: 15vh;
-		background-color: red;
-	}
-
-	.links {
-		height: 100%;
-		display: flex;
-		justify-content: space-around;
-		align-items: center;
-		color: white;
-	}
-
-	.content {
-		flex-grow: 1;
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.sidebar {
-		background-color: green;
-		width: 15vw;
-	}
-
-	.button {
-		align-self: center;
-	}
-
-	.footer {
-		transform: translateY(100%);
-		height: 15vh;
-		background-color: blue;
-	}
+	/* @keyframes move {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+} */
 </style>
