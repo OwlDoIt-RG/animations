@@ -1,172 +1,93 @@
 <script setup>
-	import gsap from "gsap";
-	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { onMounted } from "vue";
+	import { gsap } from "gsap";
 
-	onMounted(() => {
-		gsap.set("img", {
-			yPercent: -50,
-			xPercent: -50,
-			top: "50%",
-			left: "50%",
-			minWidth: "100%",
-			position: "absolute",
-		});
+	// gsap.from('.header', { duration: 1, y: '-100%', ease: 'bounce' })
+	// gsap.from('.link', { duration: 1, opacity: 0, delay: 1, stagger: .5 })
+	// gsap.from('.right', { duration: 1, x: '-100vw', delay: 1, ease: 'power2.in' })
+	// gsap.from('.left', { duration: 1, delay: 1.5, x: '-100%' })
+	// gsap.to('.footer', { duration: 1, y: 0, ease: 'elastic', delay: 2.5 })
+	// gsap.fromTo('.button', { opacity: 0, scale: 0, rotation: 720 }, { duration: 1, delay: 3.5, opacity: 1, scale: 1, rotation: 0 })
 
-		//linear easing doesn't APPEAR linear (visually).
-		gsap.fromTo(
-			"#linear img",
-			{ scale: 0.1 },
-			{ scale: 8, duration: 10, ease: "none", repeat: -1 }
+	const timeline = gsap.timeline({ defaults: { duration: 1 } });
+	timeline
+		.from(".header", { y: "-100%", ease: "bounce" })
+		.from(".link", { opacity: 0, stagger: 0.5 })
+		.from(".right", { x: "-100vw", ease: "power2.in" }, 1)
+		.from(".left", { x: "-100%" }, "<.5")
+		.to(".footer", { y: 0, ease: "elastic" })
+		.fromTo(
+			".button",
+			{ opacity: 0, scale: 0, rotation: 720 },
+			{ opacity: 1, scale: 1, rotation: 0 }
 		);
 
-		//notice how we feed in the starting and ending [scale] values to "expoScale()" so that it can adjust its curve accordingly so that scaling appears linear visually even though technically the scale values aren't animating linearly at all.
-		gsap.fromTo(
-			"#expo img",
-			{ scale: 0.1 },
-			{ scale: 8, duration: 10, ease: "expoScale(0.1, 8)", repeat: -1 }
-		);
+	const button = document.querySelector(".button");
+
+	button.addEventListener("click", () => {
+		timeline.timeScale(3);
+		timeline.reverse();
 	});
-
-	//for a more complicated example that shows multi-step zooming
-	//(swapping new images for better resolution as it progresses),
-	//see https://codepen.io/GreenSock/pen/0cfddbdd3f1954a5cc813994d7b502ac
 </script>
 
 <template>
-	<div id="container">
-		<!-- <div id="expo">
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-1.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-2.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-3.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-4.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-5.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-6.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-7.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-8.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-9.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-10.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-11.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-12.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-13.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-14.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-15.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-16.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-17.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-18.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-19.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-20.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-21.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-22.jpg"
-			/>
-			<div class="label">ExpoScaleEase</div>
-		</div> -->
-
-		<div id="linear">
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-			<img src="../assets/images/clearturnroad.jpg" />
-
-			<div class="label">Linear easing</div>
+	<body>
+		<div class="header">
+			<div class="links">
+				<div class="link">Link 1</div>
+				<div class="link">Link 2</div>
+				<div class="link">Link 3</div>
+			</div>
 		</div>
-
-		<link
-			href="//fonts.googleapis.com/css?family=Signika+Negative:300,400"
-			rel="stylesheet"
-			type="text/css"
-		/>
-	</div>
+		<div class="content">
+			<div class="sidebar left"></div>
+			<button class="button">Reverse!</button>
+			<div class="sidebar right"></div>
+		</div>
+		<div class="footer"></div>
+	</body>
 </template>
 
 <style scoped>
 	body {
 		margin: 0;
-		padding: 0;
-		background-color: black;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
 	}
 
-	#container {
+	.header {
+		height: 15vh;
+		background-color: red;
+	}
+
+	.links {
+		height: 100%;
 		display: flex;
-		min-height: 100vh;
-	}
-	#expo,
-	#linear {
-		flex-grow: 1;
-		overflow: hidden;
-		position: relative;
+		justify-content: space-around;
+		align-items: center;
 		color: white;
-		font-size: 3em;
 	}
-	#linear {
-		border-left: 2px solid white;
+
+	.content {
+		flex-grow: 1;
+		display: flex;
+		justify-content: space-between;
 	}
-	img {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		min-width: 100%;
+
+	.sidebar {
+		background-color: green;
+		width: 15vw;
 	}
-	.label {
-		position: relative;
-		top: 0px;
-		padding: 10px;
-		text-align: center;
-		font-family: "Signika Negative", sans-serif;
-		background-color: rgba(0, 0, 0, 0.5);
+
+	.button {
+		align-self: center;
+	}
+
+	.footer {
+		transform: translateY(100%);
+		height: 15vh;
+		background-color: blue;
 	}
 </style>
