@@ -2,8 +2,16 @@
 	import gsap from "gsap";
 	import { ScrollTrigger } from "gsap/ScrollTrigger";
 	import { onMounted } from "vue";
+	import { reactive, ref } from "vue";
+
+	const state = reactive({
+		shapeY: -200,
+		textOpacity: 0,
+		textY: 100,
+	});
 
 	onMounted(() => {
+		//SET IMAGE POSITIONING FIRST
 		gsap.set("img", {
 			yPercent: -50,
 			xPercent: -50,
@@ -13,14 +21,7 @@
 			position: "absolute",
 		});
 
-		//linear easing doesn't APPEAR linear (visually).
-		// gsap.fromTo(
-		// 	"#linear img",
-		// 	{ scale: 0.1 },
-		// 	{ scale: 8, duration: 10, ease: "none", repeat: -1 }
-		// );
-
-		//notice how we feed in the starting and ending [scale] values to "expoScale()" so that it can adjust its curve accordingly so that scaling appears linear visually even though technically the scale values aren't animating linearly at all.
+		//IAMGE linear easing doesn't APPEAR linear (visually).
 		gsap.fromTo(
 			"#expo img",
 			{ scale: 0.1 },
@@ -28,9 +29,31 @@
 				scale: 0.5,
 				duration: 7,
 				ease: "none",
-				/*"expoScale(0.1, 5)",*/ repeat: 0,
+				/*"expoScale(0.1, 5)",*/
+				repeat: 0,
 			}
 		);
+
+		//CHANGE opacitty of next img
+		gsap.fromTo(
+			"#signs ",
+			{ opacity: 0.5, scale: 0.1 },
+			{
+				opacity: 1,
+				duration: 7,
+				scale: 0.3,
+				ease: "slow(0.7, 0.7, false)",
+				//put to the left
+				x: -200,
+				// ease: "none",
+				// /*"expoScale(0.1, 5)",*/
+				// repeat: 0,
+			}
+		);
+		//MOTION PATH to add a shape on top of the image
+		// gsap.MotionPathPlugin.convertToPath("#path");
+
+		// gsap.set("#path", { autoAlpha: 0 });
 	});
 
 	//for a more complicated example that shows multi-step zooming
@@ -42,14 +65,14 @@
 	<div id="container">
 		<div id="expo">
 			<img src="../assets/images/pathunsplash.jpg" />
+			<!-- <img src="../assets/images/pathunsplash.jpg" />
 			<img src="../assets/images/pathunsplash.jpg" />
 			<img src="../assets/images/pathunsplash.jpg" />
 			<img src="../assets/images/pathunsplash.jpg" />
 			<img src="../assets/images/pathunsplash.jpg" />
 			<img src="../assets/images/pathunsplash.jpg" />
 			<img src="../assets/images/pathunsplash.jpg" />
-			<img src="../assets/images/pathunsplash.jpg" />
-			<img src="../assets/images/pathunsplash.jpg" />
+			<img src="../assets/images/pathunsplash.jpg" /> -->
 			<!-- <img
 				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-2.jpg"
 			/>
@@ -113,83 +136,18 @@
 			<img
 				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-22.jpg"
 			/> -->
-			<div class="label">Lorem, ipsum dsgrh</div>
+			<div class="label">IBI</div>
+			<!-- <div class="shaping">
+				<svg
+					class="shape"
+					:style="{ transform: `translateY(${shapeY}px)` }"
+					viewBox="0 0 100 100"
+				>
+					<rect width="100" height="100" />
+				</svg>
+			</div> -->
 		</div>
-
-		<!-- <div id="linear">
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-1.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-2.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-3.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-4.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-5.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-6.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-7.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-8.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-9.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-10.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-11.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-12.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-13.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-14.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-15.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-16.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-17.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-18.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-19.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-20.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-21.jpg"
-			/>
-			<img
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-22.jpg"
-			/>
-			<div class="label">Linear easing</div> 
-
-		<link
-			href="//fonts.googleapis.com/css?family=Signika+Negative:300,400"
-			rel="stylesheet"
-			type="text/css"
-		/>-->
+		<img id="signs" class="sign" src="../assets/images/signs.png" />
 	</div>
 </template>
 
@@ -205,13 +163,18 @@
 		padding: 0;
 		background-color: black;
 	}
-	#expo {
-		/*display: none;*/
-	}
+
 	#container {
+		/* background-image: url("../assets/images/pathunsplash.jpg"); */
 		display: flex;
 		min-height: 100vh;
 		min-width: 100vw;
+	}
+
+	#container img {
+		height: auto;
+		width: auto;
+		scale: 0.1;
 	}
 	#expo,
 	#linear {
@@ -230,6 +193,11 @@
 		left: 50%;
 		/* min-width: 100%; */
 	}
+
+	#signs {
+		height: 20px;
+		width: 20px;
+	}
 	.label {
 		position: relative;
 		top: 0px;
@@ -237,5 +205,21 @@
 		text-align: center;
 		font-family: "Signika Negative", sans-serif;
 		background-color: rgba(0, 0, 0, 0.5);
+	}
+	.shaping {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		background-image: src= "../assets/images/pathunsplash.jpg";
+	}
+
+	.shape {
+		fill: #67624f;
+	}
+
+	.text {
+		font-size: 2rem;
+		text-align: center;
 	}
 </style>
