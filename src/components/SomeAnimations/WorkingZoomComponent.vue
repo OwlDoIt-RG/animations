@@ -50,13 +50,6 @@
 				// repeat: 0,
 			}
 		);
-
-		gsap.to("#team", {
-			y: 250,
-			delay: 5,
-			duration: 2,
-			visibility: "visible",
-		});
 		//MOTION PATH to add a shape on top of the image
 		// gsap.MotionPathPlugin.convertToPath("#path");
 
@@ -153,9 +146,8 @@
 					<rect width="100" height="100" />
 				</svg>
 			</div> -->
-			<button id="team" class="tabs" opacity="0">Équipe</button>
 		</div>
-		<!-- <img id="signs" class="sign" src="../assets/images/signs.png" /> -->
+		<img id="signs" class="sign" src="../assets/images/signs.png" />
 	</div>
 </template>
 
