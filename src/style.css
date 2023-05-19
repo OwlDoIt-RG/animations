@@ -30,6 +30,12 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 }
+.bgImg {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	width: 100vw;
+}
 
 nav {
 	display: block;

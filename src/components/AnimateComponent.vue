@@ -17,7 +17,7 @@
 			xPercent: -50,
 			// top: "50%",
 			// left: "50%",
-			minWidth: "100%",
+			minWidth: "500px",
 			position: "absolute",
 		});
 
@@ -28,8 +28,7 @@
 			{
 				scale: 0.5,
 				duration: 7,
-				ease: "none",
-				/*"expoScale(0.1, 5)",*/
+				ease: "expoScale(0.1, 5)",
 				repeat: 0,
 			}
 		);
@@ -67,7 +66,7 @@
 		gsap.to("#price", {
 			y: 100,
 			x: -200,
-			delay: 6,
+			delay: 7,
 			duration: 2,
 			autoAlpha: 1, //opacity to 1
 		});
@@ -85,7 +84,7 @@
 <template>
 	<div id="container">
 		<div id="expo">
-			<img src="../assets/images/pathunsplash.jpg" />
+			<img id="bgImg" src="../assets/images/pathunsplash.jpg" />
 			<!-- <img src="../assets/images/pathunsplash.jpg" />
 			<img src="../assets/images/pathunsplash.jpg" />
 			<img src="../assets/images/pathunsplash.jpg" />
@@ -180,10 +179,10 @@
 					<rect width="100" height="100" />
 				</svg>
 			</div> -->
-			<button id="discover" class="tabs">Ibi</button>
+			<!--<button id="discover" class="tabs">Ibi</button>
 			<button id="appli" class="tabs">L'app</button>
 			<button id="price" class="tabs" opacity="0">Prix</button>
-			<!--<button id="approach" class="tabs">L'approche</button>
+			<button id="approach" class="tabs">L'approche</button>
 			 <button id="change" class="tabs" opacity="0">Changement</button>
 			<button id="team" class="tabs" opacity="0">L'équipe</button>
 			<button id="contact" class="tabs" opacity="0">Nous joindre</button> -->
