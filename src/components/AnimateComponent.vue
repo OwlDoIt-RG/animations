@@ -51,11 +51,25 @@
 			}
 		);
 
-		gsap.to("#team", {
-			y: 250,
+		gsap.to("#discover", {
+			y: 200,
 			delay: 5,
 			duration: 2,
-			visibility: "visible",
+			autoAlpha: 1, //opacity to 1
+		});
+		gsap.to("#appli", {
+			y: 200,
+			x: 200,
+			delay: 6,
+			duration: 2,
+			autoAlpha: 1, //opacity to 1
+		});
+		gsap.to("#price", {
+			y: 100,
+			x: -200,
+			delay: 6,
+			duration: 2,
+			autoAlpha: 1, //opacity to 1
 		});
 		//MOTION PATH to add a shape on top of the image
 		// gsap.MotionPathPlugin.convertToPath("#path");
@@ -143,7 +157,20 @@
 			<img
 				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/106114/zoom-22.jpg"
 			/> -->
-			<div class="label">IBI</div>
+			<div class="label">
+				IBI
+				<nav>
+					<ul class="navBar">
+						<li>Découvrir Ibi</li>
+						<li>L'application</li>
+						<li>L'approche</li>
+						<li>Opérer le changement</li>
+						<li>Prix et licences</li>
+						<li>L'équipe</li>
+						<li>Nous joindre</li>
+					</ul>
+				</nav>
+			</div>
 			<!-- <div class="shaping">
 				<svg
 					class="shape"
@@ -153,7 +180,13 @@
 					<rect width="100" height="100" />
 				</svg>
 			</div> -->
-			<button id="team" class="tabs" opacity="0">Équipe</button>
+			<button id="discover" class="tabs">Ibi</button>
+			<button id="appli" class="tabs">L'app</button>
+			<button id="price" class="tabs" opacity="0">Prix</button>
+			<!--<button id="approach" class="tabs">L'approche</button>
+			 <button id="change" class="tabs" opacity="0">Changement</button>
+			<button id="team" class="tabs" opacity="0">L'équipe</button>
+			<button id="contact" class="tabs" opacity="0">Nous joindre</button> -->
 		</div>
 		<!-- <img id="signs" class="sign" src="../assets/images/signs.png" /> -->
 	</div>
@@ -209,10 +242,17 @@
 	.label {
 		position: relative;
 		top: 0px;
-		padding: 10px;
+		padding: 1px;
 		text-align: center;
-		font-family: "Signika Negative", sans-serif;
+
 		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.navBar {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
 	}
 	.shaping {
 		display: flex;
