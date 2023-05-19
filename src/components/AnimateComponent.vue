@@ -4,12 +4,6 @@
 	import { onMounted } from "vue";
 	import { reactive, ref } from "vue";
 
-	const state = reactive({
-		shapeY: -200,
-		textOpacity: 0,
-		textY: 100,
-	});
-
 	onMounted(() => {
 		//SET IMAGE POSITIONING FIRST
 		gsap.set("img", {
@@ -30,6 +24,8 @@
 				duration: 7,
 				ease: "expoScale(0.1, 5)",
 				repeat: 0,
+				//skewX: 45,
+				x: 200,
 			}
 		);
 
@@ -179,10 +175,10 @@
 					<rect width="100" height="100" />
 				</svg>
 			</div> -->
-			<!--<button id="discover" class="tabs">Ibi</button>
+			<button id="discover" class="tabs">Ibi</button>
 			<button id="appli" class="tabs">L'app</button>
 			<button id="price" class="tabs" opacity="0">Prix</button>
-			<button id="approach" class="tabs">L'approche</button>
+			<!--<button id="approach" class="tabs">L'approche</button>
 			 <button id="change" class="tabs" opacity="0">Changement</button>
 			<button id="team" class="tabs" opacity="0">L'équipe</button>
 			<button id="contact" class="tabs" opacity="0">Nous joindre</button> -->
